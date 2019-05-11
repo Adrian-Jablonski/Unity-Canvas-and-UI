@@ -7,9 +7,11 @@ public class GameController : MonoBehaviour
 {
     // Buttons added to the buttonList by dragging and dropping the Text fields for all 9 buttons into Game Controller Button List
     public Text[] buttonList;
+    private string playerSide;
 
     void Awake()
     {
+        playerSide = "X";
         SetGameControllerReferenceOnButtons();
     }
 
@@ -24,12 +26,71 @@ public class GameController : MonoBehaviour
 
     public string GetPlayerSide()
     {
-        return "?";
+        return playerSide;
     }
 
     public void EndTurn()
     {
-        Debug.Log("EndTurn is not implemented!");
+        // Check rows
+        if (CheckForWin(0, 1, 2)){
+            GameOver();
+        }
+        else if (CheckForWin(3, 4, 5)){
+            GameOver();
+        }
+        else if (CheckForWin(6, 7, 8))
+        {
+            GameOver();
+        }
+        // Check columns
+        else if (CheckForWin(0, 3, 6))
+        {
+            GameOver();
+        }
+        else if (CheckForWin(1, 4, 7))
+        {
+            GameOver();
+        }
+        else if (CheckForWin(2, 5, 8))
+        {
+            GameOver();
+        }
+        // Check diagonals
+        else if (CheckForWin(0, 4, 8))
+        {
+            GameOver();
+        }
+        else if (CheckForWin(2, 4, 6))
+        {
+            GameOver();
+        }
+        else
+        {
+            ChangeSides();
+        }
+
+    }
+
+    void ChangeSides()
+    {
+        playerSide = (playerSide == "X") ? "O" : "X";
+    }
+
+    public bool CheckForWin(int i, int j, int k)
+    {
+        string btn1 = buttonList[i].text;
+        string btn2 = buttonList[j].text;
+        string btn3 = buttonList[k].text;
+
+        return playerSide == btn1 && btn1 == btn2 && btn2 == btn3;
+    }
+
+    public void GameOver()
+    {
+        for (int i = 0; i < buttonList.Length; i++)
+        {
+            buttonList[i].GetComponentInParent<Button>().interactable = false;
+        }
     }
 
 }
