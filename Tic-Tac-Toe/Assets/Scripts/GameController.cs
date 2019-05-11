@@ -3,6 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class Player
+{
+    public Image panel;
+    public Text text;
+}
+
+[System.Serializable]
+public class PlayerColor
+{
+    public Color panelColor;
+    public Color textColor;
+}
+
 public class GameController : MonoBehaviour
 {
     // Buttons added to the buttonList by dragging and dropping the Text fields for all 9 buttons into Game Controller Button List
@@ -13,6 +27,11 @@ public class GameController : MonoBehaviour
     private int moveCount;
     public GameObject restartButton;
 
+    public Player playerX;
+    public Player playerO;
+    public PlayerColor activePlayerColor;
+    public PlayerColor inactivePlayerColor;
+
     void Awake()
     {
         playerSide = "X";
@@ -20,6 +39,7 @@ public class GameController : MonoBehaviour
         SetGameControllerReferenceOnButtons();
         moveCount = 0;
         restartButton.SetActive(false);
+        SetPlayerColors(playerX, playerO);
     }
 
     void SetGameControllerReferenceOnButtons()
@@ -86,6 +106,14 @@ public class GameController : MonoBehaviour
     void ChangeSides()
     {
         playerSide = (playerSide == "X") ? "O" : "X";
+        if (playerSide == "X")
+        {
+            SetPlayerColors(playerX, playerO);
+        }
+        else
+        {
+            SetPlayerColors(playerO, playerX);
+        }
     }
 
     public bool CheckForWin(int i, int j, int k)
@@ -131,6 +159,15 @@ public class GameController : MonoBehaviour
         gameOverPanel.SetActive(false);
         SetButtonInteractive(true);
         restartButton.SetActive(false);
+        SetPlayerColors(playerX, playerO);
+    }
+
+    void SetPlayerColors(Player newPlayer, Player oldPlayer)
+    {
+        newPlayer.panel.color = activePlayerColor.panelColor;
+        newPlayer.text.color = activePlayerColor.textColor;
+        oldPlayer.panel.color = inactivePlayerColor.panelColor;
+        oldPlayer.text.color = inactivePlayerColor.textColor;
     }
 
 }
