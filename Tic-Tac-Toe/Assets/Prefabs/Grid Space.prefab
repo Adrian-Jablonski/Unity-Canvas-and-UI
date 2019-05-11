@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4598778625808489018}
   - component: {fileID: 2218146798510505337}
   - component: {fileID: 9095564608808964773}
+  - component: {fileID: 5214374629854574789}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -79,6 +80,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &5214374629854574789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781797160362288009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48220aa69ade6c64d88c408601d6a7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
+  buttonText: {fileID: 0}
+  playerSide: 
 --- !u!1 &7291642933595848857
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +107,7 @@ GameObject:
   - component: {fileID: 5249503840080828775}
   - component: {fileID: 2552525040114986073}
   - component: {fileID: 1105202895197274753}
+  - component: {fileID: 2461867707376863556}
   m_Layer: 5
   m_Name: Grid Space
   m_TagString: Untagged
@@ -197,6 +214,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2552525040114986073}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2461867707376863556}
+        m_MethodName: SetSpace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &2461867707376863556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291642933595848857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48220aa69ade6c64d88c408601d6a7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1105202895197274753}
+  buttonText: {fileID: 9095564608808964773}
+  playerSide: X
