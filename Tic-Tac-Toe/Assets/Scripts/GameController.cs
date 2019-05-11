@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public GameObject gameOverPanel;
     public Text gameOverText;
     private int moveCount;
+    public GameObject restartButton;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class GameController : MonoBehaviour
         gameOverPanel.SetActive(false);
         SetGameControllerReferenceOnButtons();
         moveCount = 0;
+        restartButton.SetActive(false);
     }
 
     void SetGameControllerReferenceOnButtons()
@@ -99,16 +101,36 @@ public class GameController : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         gameOverText.text = value;
+
+        restartButton.SetActive(true);
     }
 
     public void GameOver()
     {
-        for (int i = 0; i < buttonList.Length; i++)
-        {
-            buttonList[i].GetComponentInParent<Button>().interactable = false;
-        }
+        SetButtonInteractive(false);
 
         SetGameOverText(playerSide + " Wins!");
+    }
+
+    private void SetButtonInteractive(bool b)
+    {
+        for (int i = 0; i < buttonList.Length; i++)
+        {
+            buttonList[i].GetComponentInParent<Button>().interactable = b;
+            if (b)
+            {
+                buttonList[i].text = "";
+            }
+        }
+    }
+
+    public void RestartGame()
+    {
+        playerSide = "X";
+        moveCount = 0;
+        gameOverPanel.SetActive(false);
+        SetButtonInteractive(true);
+        restartButton.SetActive(false);
     }
 
 }
