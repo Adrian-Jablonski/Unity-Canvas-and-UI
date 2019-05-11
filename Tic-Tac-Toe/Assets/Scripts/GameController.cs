@@ -8,10 +8,13 @@ public class GameController : MonoBehaviour
     // Buttons added to the buttonList by dragging and dropping the Text fields for all 9 buttons into Game Controller Button List
     public Text[] buttonList;
     private string playerSide;
+    public GameObject gameOverPanel;
+    public Text gameOverText;
 
     void Awake()
     {
         playerSide = "X";
+        gameOverPanel.SetActive(false);
         SetGameControllerReferenceOnButtons();
     }
 
@@ -68,7 +71,6 @@ public class GameController : MonoBehaviour
         {
             ChangeSides();
         }
-
     }
 
     void ChangeSides()
@@ -91,6 +93,9 @@ public class GameController : MonoBehaviour
         {
             buttonList[i].GetComponentInParent<Button>().interactable = false;
         }
+
+        gameOverPanel.SetActive(true);
+        gameOverText.text = playerSide + " Wins!";
     }
 
 }
