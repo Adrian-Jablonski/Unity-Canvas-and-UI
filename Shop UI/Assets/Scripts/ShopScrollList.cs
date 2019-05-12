@@ -1,14 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 [System.Serializable]
 public class Item
 {
     public string itemName;
-    public Texture icon;
     public float price = 1f;
+
+    public Item()
+    {
+    }
+
+    public Item(string itemName, float price)
+    {
+        this.itemName = itemName;
+        this.price = price;
+    }
 }
 
 public class ShopScrollList : MonoBehaviour
@@ -20,10 +30,12 @@ public class ShopScrollList : MonoBehaviour
     public Text myGoldDisplay;
     public SimpleObjectPool buttonObjectPool;
     public float gold = 20f;
+    public ImageLoader imageLoader;
 
     // Start is called before the first frame update
     void Start()
     {
+        SetItemList();
         RefreshDisplay();
     }
 
@@ -43,5 +55,19 @@ public class ShopScrollList : MonoBehaviour
             SampleButton sampleButton = newButton.GetComponent<SampleButton>();
             sampleButton.Setup(item, this);
         }
+    }
+
+    private void SetItemList()
+    {
+        itemList.Add(new Item("Item 1",  20f));
+        itemList.Add(new Item("Item 2", 100f));
+        itemList.Add(new Item("Item 3", 40f));
+        itemList.Add(new Item("Item 4", 13f));
+        itemList.Add(new Item("Item 5", 50f));
+    }
+
+    public void ClickedItem(Item item)
+    {
+        Debug.Log("CLICKED ITEM: " + item.itemName);
     }
 }

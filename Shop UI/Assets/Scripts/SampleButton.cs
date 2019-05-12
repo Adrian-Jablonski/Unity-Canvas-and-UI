@@ -18,7 +18,7 @@ public class SampleButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        button.onClick.AddListener(HandleClick);
     }
 
     public void Setup(Item currentItem, ShopScrollList currentScrollList)
@@ -29,6 +29,11 @@ public class SampleButton : MonoBehaviour
         // iconImage.texture = item.icon;   //TODO: Set up for image to load from URL
 
         scrollList = currentScrollList;
+    }
+
+    public void HandleClick()
+    {
+        scrollList.ClickedItem(item);
     }
     
 }
