@@ -12,15 +12,23 @@ public class SampleButton : MonoBehaviour
     public Text priceLabel;
     public RawImage iconImage;
 
+    private Item item;
+    private ShopScrollList scrollList;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void Setup()
+    public void Setup(Item currentItem, ShopScrollList currentScrollList)
     {
+        item = currentItem;
+        nameLabel.text = item.itemName;
+        priceLabel.text = item.price.ToString();
+        // iconImage.texture = item.icon;   //TODO: Set up for image to load from URL
 
+        scrollList = currentScrollList;
     }
     
 }
