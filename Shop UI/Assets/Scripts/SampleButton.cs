@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class SampleButton : MonoBehaviour
@@ -14,6 +15,7 @@ public class SampleButton : MonoBehaviour
 
     private Item item;
     private ShopScrollList scrollList;
+    public ImageLoader imageLoader;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,8 @@ public class SampleButton : MonoBehaviour
         item = currentItem;
         nameLabel.text = item.itemName;
         priceLabel.text = item.price.ToString();
-        // iconImage.texture = item.icon;   //TODO: Set up for image to load from URL
+        StartCoroutine(GetTexture(item.url, iconImage));
+
 
         scrollList = currentScrollList;
     }
@@ -35,5 +38,21 @@ public class SampleButton : MonoBehaviour
     {
         scrollList.ClickedItem(item);
     }
-    
+
+    IEnumerator GetTexture(string url, RawImage image)
+    {
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            image.texture = myTexture;
+        }
+    }
+
 }

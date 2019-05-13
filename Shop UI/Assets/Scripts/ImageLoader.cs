@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ImageLoader : MonoBehaviour
 {
-    public string url = "http://lorempixel.com/400/200/nature";
+    public string url = "https://picsum.photos/200/300";
     public RawImage rawImage;
 
     // Start is called before the first frame update
@@ -15,7 +15,7 @@ public class ImageLoader : MonoBehaviour
         StartCoroutine(GetTexture(url, rawImage));
     }
 
-    IEnumerator GetTexture(string url, RawImage image)
+    public IEnumerator GetTexture(string url, RawImage image)
     {
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
         yield return www.SendWebRequest();
